@@ -40,10 +40,9 @@ Encoding.prototype.encode = function (text) {
     };
 
     function encodeString(text, encoding, delimiter) {
-        const s = text.toLowerCase().split('');
         let out = '';
-        for (let i = 0; i < s.length; i++) {
-            let char = s[i];
+        for (let i = 0; i < text.length; i++) {
+            let char = text[i];
             out += encodeChar(char, encoding) + delimiter;
         }
         return out;
@@ -75,4 +74,4 @@ for (let i = 0; i < morseCodeAlphabetArray.length; i++) {
 
 const morseCode = new Encoding("Morse Code", "/", morseCodeAlphabetMapOfCharObjects)
 // console.log(morseCodeAlphabetMapOfCharObjects);
-console.log(morseCode.encode("Hello world!"));
+console.log(morseCode.encode("hello world!"));
