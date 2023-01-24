@@ -3,12 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>JS Playground</title>
-<script src="exercises/excercises02.js"></script>
+    <script src="exercises/excercises02.js"></script>
+    <style>
+        #ball {position: absolute; display: inline-block; height: 50px; width: 50px; border-radius: 25px; background-color: aquamarine}
+    </style>
 </head>
 <body>
 <h2>JS Playground</h2>
+<a href="http://localhost:8080">test</a>
+<a href="http://localhost:8081">test2</a>
+<div id="ball"></div>
 <script>
     console.log("Hello World!");
+    const root = document.documentElement;
+    root.children;
+
+    function findAnchors(node) {
+        if (node.tagName === 'A') {
+            console.log(node.textContent + " -> " + node.href)
+            return;
+        }
+        for (let i = 0; i < node.children.length; i++) {
+            findAnchors(node.children[i])
+        }
+    }
+
+    // The background color shall change between red and blue every second
+    const ball = document.querySelector('#ball');
+    let toggle = false;
+
+    // The animation function
+    function animate() {
+        ball.style.backgroundColor = toggle ? '#f00' : '#00f';
+        toggle = !toggle;
+        // Keep the animation runnning
+        // setTimeout(animate, 1000);
+    }
+    // Start the animation
+    // setTimeout(animate, 1000);
+
+
+    ball.addEventListener('click', toggleColor)
+
+
 </script>
 </body>
 </html>

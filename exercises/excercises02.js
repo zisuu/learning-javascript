@@ -8,7 +8,7 @@ function Character(char, code) {
 
 
 Character.prototype.toString = function () {
-    console.log(this.char + ": " + this.code);
+    return this.char + ": " + this.code;
 };
 
 // const a = new Character("a", ".-");
@@ -24,38 +24,35 @@ Character.prototype.toString = function () {
 function Encoding(name, delimiter, characters) {
     this.name = name;
     this.delimiter = delimiter;
-    this.characters = characters;
+
+    this.characterMap = {};
+    const that = this;
+    characters.forEach(function (item, index) {
+        that.characterMap[item.char] = item;
+    });
 }
 
 Encoding.prototype.encode = function (text) {
 
-    const encodeChar = function (char, encoding) {
-        for (let [key, value] of encoding) {
-                if (key === char) {
-                    return value;
-                }
+    let encodeText = "";
+    for (let i = 0; i < text.length; i++) {
+        if (this.characterMap[text[i]]) {
+            const character = this.characterMap[text[i]];
+            encodeText += character.code + this.delimiter;
+        } else {
+            encodeText += "[" + text[i] + "]" + this.delimiter;
         }
-
-        return "[" + char + "]";
-    };
-
-    function encodeString(text, encoding, delimiter) {
-        let out = '';
-        for (let i = 0; i < text.length; i++) {
-            let char = text[i];
-            out += encodeChar(char, encoding) + delimiter;
-        }
-        return out;
     }
-
-    return encodeString(text, this.characters, this.delimiter);
-
+    return encodeText;
 };
 
 Encoding.prototype.toString = function () {
-    console.log(this.name + this.characters + this.delimiter);
+    let output = this.name + ": ";
+    for (let char in this.characterMap) {
+        output += char.toString() + ", ";
+    }
+    return output;
 };
-
 
 // create morseCodeAlphabetArray
 const morseCodeAlphabetString =
@@ -63,15 +60,21 @@ const morseCodeAlphabetString =
     "m=--;n=-.;o=---;p=.---.;q=--.-;r=.-.;s=...;t=-;u=..-;v=...-;w=.--;x=-..-;" +
     "y=-.-;z=--..; =//;.=.-.-.-;,=--..--;?=..--..";
 
-const morseCodeAlphabetArray = morseCodeAlphabetString.split(";");
+const morseCodeAlphabetArray = [];
+const alphabet = morseCodeAlphabetString.split(";");
 
-// const morseCodeAlphabetArrayOfCharObjects = [];
-const morseCodeAlphabetMapOfCharObjects = new Map();
-for (let i = 0; i < morseCodeAlphabetArray.length; i++) {
-    // morseCodeAlphabetArrayOfCharObjects[i] = new Character(morseCodeAlphabetArray[i].split("=")[0], morseCodeAlphabetArray[i].split("=")[1]);
-    morseCodeAlphabetMapOfCharObjects.set(morseCodeAlphabetArray[i].split("=")[0], morseCodeAlphabetArray[i].split("=")[1]);
+alphabet.forEach(function (item) {
+    const char = item.split('=');
+    morseCodeAlphabetArray.push(new Character(char[0], char[1]))
+});
+
+
+const morseCode = new Encoding("Morse Code", "/", morseCodeAlphabetArray)
+
+// override
+morseCode.encode = function (text) {
+    text = text.toLowerCase()
+    return Encoding.prototype.encode.call(morseCode, text)
 }
 
-const morseCode = new Encoding("Morse Code", "/", morseCodeAlphabetMapOfCharObjects)
-// console.log(morseCodeAlphabetMapOfCharObjects);
-console.log(morseCode.encode("hello world!"));
+console.log(morseCode.encode("Hello world!"));
