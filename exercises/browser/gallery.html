@@ -1,26 +1,55 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>Gallery</title>
-		<style>
-			#gallery { border: black solid 1px; margin: 20px; width: 500px; position: relative; overflow: hidden; height: 300px; }
-			img { width: 100%; cursor: pointer; }
-		</style>
-	</head>
-	<body>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Gallery</title>
+    <style>
+        #gallery {
+            border: black solid 1px;
+            margin: 20px;
+            width: 500px;
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
 
-		<div id="gallery">
-			<img src="images/image_0.jpg"/>
-			<img src="images/image_1.jpg"/>
-			<img src="images/image_2.jpg"/>
-			<img src="images/image_3.jpg"/>
-			<img src="images/image_4.jpg"/>
-			<img src="images/image_5.jpg"/>
-			<img src="images/image_6.jpg"/>
-			<img src="images/image_7.jpg"/>
-			<img src="images/image_8.jpg"/>
-		</div>
+        img {
+            width: 100%;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+</head>
+<body>
 
-	</body>
+<div id="gallery">
+    <img src="images/image_0.jpg" style="display: block;"/>
+    <img src="images/image_1.jpg" style="display: none;"/>
+    <img src="images/image_2.jpg" style="display: none;"/>
+    <img src="images/image_3.jpg" style="display: none;"/>
+    <img src="images/image_4.jpg" style="display: none;"/>
+    <img src="images/image_5.jpg" style="display: none;"/>
+    <img src="images/image_6.jpg" style="display: none;"/>
+    <img src="images/image_7.jpg" style="display: none;"/>
+    <img src="images/image_8.jpg" style="display: none;"/>
+</div>
+
+</body>
+<script>
+    let images = document.querySelectorAll('img')
+    let counter = 0;
+    document.querySelector('#gallery').addEventListener('click', toggleNext);
+
+    function toggleNext() {
+        if (counter < images.length -1) {
+            images[counter + 1].style.display =
+                images[counter + 1].style.display === 'none' ? 'block' : 'none';
+            images[counter].style.display = 'none';
+            counter++;
+        } else {
+            counter = 0;
+        }
+    }
+
+</script>
 </html>

@@ -18,8 +18,26 @@
 			<label>Email</label><input name="email" type="email" required/><br />
 			<label>Password</label><input name="pw1" type="password" required/><br />
 			<label>Repeat PW</label><input name="pw2" type="password" required/><br />
-			<input type="submit" name="submit" value="Register"/>
+			<input type="submit" name="submit" value="Register"/><br />
+			<span class="error" name="error" aria-live="polite"></span>
 		</form>
 
 	</body>
+	<script type="text/javascript">
+		// check if pw1 and pw2 matches
+		const pw1 = document.querySelector('input[name="pw1"]');
+		const pw2 = document.querySelector('input[name="pw2"]');
+		const validationPassword = document.querySelector('.error');
+
+		const form = document.querySelector('form');
+		form.addEventListener('submit', function(e){
+			if(pw1.value !== pw2.value) {
+				e.preventDefault();
+				validationPassword.textContent="Password and Repeat PW must match!";
+				// alert("Password and Repeat PW must match!");
+			} else {
+				console.log('passwords did match!');
+			}
+		});
+	</script>
 </html>
