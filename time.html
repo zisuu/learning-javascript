@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>time</title>
+    <style>
+        #time { cursor: pointer }
+    </style>
+</head>
+<body>
+<h2>time</h2>
+<p id="time">Get Time</p>
+<script>
+    const time = document.getElementById('time');
+    time.onclick = function () {
+        // Create a new XMLHttpRequest object
+        const xhr = new XMLHttpRequest();
+        // Specify the type of request: method and url
+        // xhr.open('GET', 'https://locher.ti.bfh.ch/services/time');
+        xhr.open('GET', 'https://locher.ti.bfh.ch/services/time?format=json');
+        // Register a callback to be notified about state changes
+        xhr.onloadend = function () {
+            if (this.status === 200) {
+                const data = JSON.parse(this.responseText)
+                time.innerHTML = data.h + "/" + data.m +"/" + data.s;
+            } else {
+                // Error handling...
+                console.log("Something failed!");
+            }
+        }
+        xhr.send();
+    }
+</script>
+</body>
+</html>
