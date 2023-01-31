@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Promises</title>
+<!--    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>-->
+    <script src="promise.js"></script>
+</head>
+<body>
+
+<button id="get-quote">Get a random quote</button>
+<p id="quote"></p>
+
+</body>
+<script>
+    const quoteButton = document.getElementById('get-quote');
+    const quoteP = document.getElementById('quote');
+    quoteButton.onclick = function () {
+        quoteP.innerHTML = "Loading.. please wait";
+        quoteButton.disabled = true;
+        getQuote()
+            .then(data => quoteP.innerHTML = data)
+            .catch(error => console.log("An error occurred: " + error))
+        quoteButton.disabled = false;
+    }
+</script>
+
+</html>
