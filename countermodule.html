@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter Example</title>
+<!--    <script src="lib/counter-service.js"></script>-->
+</head>
+<body>
+<h2>counter example</h2>
+<script type="module">
+    import {get, increment} from "./lib/counter-service2.js";
+    import * as CS from './lib/counter-service2.js';
+
+    console.log(get())
+    // console.log(counterService.get())
+    console.log(increment())
+    console.log(increment())
+    // console.log(counterService.increment())
+    // console.log(counterService.increment())
+    // console.log(counterService.increment())
+
+    for (let i = 0; i < 10; i++) {
+        console.log("Hello world")
+    }
+    // console.log(counterService.increment())
+    // console.log(counterService.increment())
+    // console.log(counterService.increment())
+</script>
+</body>
+</html>
