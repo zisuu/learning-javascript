@@ -37,18 +37,22 @@
 </body>
 <script>
     let images = document.querySelectorAll('img')
-    let counter = 0;
+    let count = 0;
     document.querySelector('#gallery').addEventListener('click', toggleNext);
 
     function toggleNext() {
-        if (counter < images.length -1) {
-            images[counter + 1].style.display =
-                images[counter + 1].style.display === 'none' ? 'block' : 'none';
-            images[counter].style.display = 'none';
-            counter++;
-        } else {
-            location.reload();
+        // increment our counter
+        count++;
+
+        // reset counter if we reach end of array
+        if (count === images.length) {
+            count = 0;
+            images[images.length-1].style.display = 'none';
         }
+
+        images[count].style.display =
+            images[count].style.display === 'none' ? 'block' : 'none';
+        images[count -1].style.display = 'none';
     }
 
 </script>
