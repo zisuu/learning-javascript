@@ -1,18 +1,61 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>Quotes</title>
-	</head>
-	<body>
-		<!--
-			Quote Service:
-			  -> text: https://locher.ti.bfh.ch/services/quote
-			  -> json: https://locher.ti.bfh.ch/services/quote?format=json
-		-->
+<head>
+    <meta charset="UTF-8"/>
+    <title>Quotes</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+</head>
+<body>
+<!--
+    Quote Service:
+      -> text: https://locher.ti.bfh.ch/services/quote
+      -> json: https://locher.ti.bfh.ch/services/quote?format=json
+-->
 
-		<button id="get-quote">Get a random quote</button>
-		<p id="quote"></p>
+<button id="get-quote">Get a random quote</button>
+<p id="quote"></p>
 
-	</body>
+</body>
+<script>
+    // Option plane js
+    // const quoteButton = document.getElementById('get-quote');
+    // const quoteP = document.getElementById('quote');
+    // quoteButton.onclick = function () {
+    //     quoteP.innerHTML = "Loading.. please wait";
+    //     quoteButton.disabled = true;
+    //     // Create a new XMLHttpRequest object
+    //     const xhr = new XMLHttpRequest();
+    //     // Specify the type of request: method and url
+    //     xhr.open('GET', 'https://locher.ti.bfh.ch/services/quote?format=json');
+    //     // Register a callback to be notified about state changes
+    //     xhr.onloadend = function () {
+    //         if (this.status === 200) {
+    //             const data = JSON.parse(this.responseText)
+    //             quoteP.innerHTML = data.quote + "<br>(" + data.author + ")";
+    //         } else {
+    //             quoteP.innerHTML = "";
+    //             // Error handling...
+    //             console.log("Something failed!");
+    //         }
+    //         quoteButton.disabled = false;
+    //     }
+    //     xhr.send();
+    // }
+
+    // Option with jquery
+    $('#get-quote').click(function () {
+        $('#quote').html("Loading.. please wait");
+    	$.ajax({
+    		url: 'https://locher.ti.bfh.ch/services/quote?format=json',
+    		method: 'GET',
+    		success: function (data) {
+    			$('#quote').html(`${data.quote}<br>${data.author}`);
+    		},
+    		error: function () {
+    			console.log("Something failed!");
+    		}
+    	})
+    })
+</script>
+
 </html>
