@@ -16,6 +16,10 @@
         img {
             width: 100%;
             cursor: pointer;
+            position: absolute;
+        / / option 3 top: 0;
+        / / option 3 left: 0;
+        / / option 3
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -23,37 +27,56 @@
 <body>
 
 <div id="gallery">
-    <img src="images/image_0.jpg" style="display: block;"/>
-    <img src="images/image_1.jpg" style="display: none;"/>
-    <img src="images/image_2.jpg" style="display: none;"/>
-    <img src="images/image_3.jpg" style="display: none;"/>
-    <img src="images/image_4.jpg" style="display: none;"/>
-    <img src="images/image_5.jpg" style="display: none;"/>
-    <img src="images/image_6.jpg" style="display: none;"/>
-    <img src="images/image_7.jpg" style="display: none;"/>
-    <img src="images/image_8.jpg" style="display: none;"/>
+    <img src="images/image_0.jpg"/>
+    <img src="images/image_1.jpg"/>
+    <img src="images/image_2.jpg"/>
+    <img src="images/image_3.jpg"/>
+    <img src="images/image_4.jpg"/>
+    <img src="images/image_5.jpg"/>
+    <img src="images/image_6.jpg"/>
+    <img src="images/image_7.jpg"/>
+    <img src="images/image_8.jpg"/>
 </div>
 
 </body>
 <script>
-    let images = document.querySelectorAll('img')
-    let count = 0;
-    document.querySelector('#gallery').addEventListener('click', toggleNext);
+    // Option 1
+    // let images = document.querySelectorAll('img')
+    // let count = 0;
+    // document.querySelector('#gallery').addEventListener('click', toggleNext);
+    //
+    // function toggleNext() {
+    //     images[count].style.display = 'none';
+    //     // increment our counter
+    //     count++;
+    //     // reset counter if we reach end of array
+    //     count = count >= images.length ? 0 : count;
+    //     images[count].style.display = 'block';
+    // }
 
-    function toggleNext() {
-        // increment our counter
-        count++;
 
-        // reset counter if we reach end of array
-        if (count === images.length) {
-            count = 0;
-            images[images.length-1].style.display = 'none';
-        }
+    // Option 2
+    // document.querySelectorAll('#gallery img').forEach(function (item) {
+    //     item.addEventListener('click', function () {
+    //         item.style.display = 'none';
+    //         const next = item.nextElementSibling ? item.nextElementSibling : item.parentElement.firstElementChild.style.display = 'block';
+    //         next.style.display = 'block';
+    //     })
+    // })
 
-        images[count].style.display =
-            images[count].style.display === 'none' ? 'block' : 'none';
-        images[count -1].style.display = 'none';
-    }
+    // Option 3
+    const gallery = document.querySelector('#gallery');
+    gallery.addEventListener('click', function () {
+        gallery.append(gallery.children[0])
+    })
 
+    $('img')
+        .click(function () {
+            const $this = $(this);
+            $this.fadeOut(700);
+            const $next = $this.next().length > 0 ? $this.next() : $('img').first();
+            $next.delay(500).fadeIn(700);
+        })
+        .hide().first().show();
 </script>
 </html>
