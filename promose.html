@@ -1,28 +1,56 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Promises</title>
-<!--    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>-->
+    <meta charset="UTF-8">
+    <title>Title</title>
     <script src="promise.js"></script>
 </head>
 <body>
-
-<button id="get-quote">Get a random quote</button>
-<p id="quote"></p>
-
+<!--<button id="get-quote">Get a random quote</button>-->
+<p id="quote1"></p>
+<p id="quote2"></p>
+<p id="quote3"></p>
+<p id="quote4"></p>
+<p id="morse1"></p>
+<p id="morse2"></p>
+<p id="morse3"></p>
+<p id="morse4"></p>
 </body>
 <script>
-    const quoteButton = document.getElementById('get-quote');
-    const quoteP = document.getElementById('quote');
-    quoteButton.onclick = function () {
-        quoteP.innerHTML = "Loading.. please wait";
-        quoteButton.disabled = true;
-        getQuote()
-            .then(data => quoteP.innerHTML = data)
-            .catch(error => console.log("An error occurred: " + error))
-        quoteButton.disabled = false;
-    }
-</script>
+    const quoteP1 = document.getElementById('quote1');
+    const quoteP2 = document.getElementById('quote2');
+    const quoteP3 = document.getElementById('quote3');
+    const quoteP4 = document.getElementById('quote4');
+    quoteP1.innerHTML = "Loading.. please wait";
+    quoteP2.innerHTML = "Loading.. please wait";
+    quoteP3.innerHTML = "Loading.. please wait";
+    quoteP4.innerHTML = "Loading.. please wait";
+    getQuote()
+        .then(data => quoteP1.innerHTML = data)
+        .catch(error => console.log(error))
+    getQuote()
+        .then(data => quoteP2.innerHTML = data)
+        .catch(error => console.log(error))
+    getQuote()
+        .then(data => quoteP3.innerHTML = data)
+        .catch(error => console.log(error))
+    getQuote()
+        .then(data => quoteP4.innerHTML = data)
+        .catch(error => console.log(error))
 
+    const morseP1 = document.getElementById('morse1');
+    const morseP2 = document.getElementById('morse2');
+    const morseP3 = document.getElementById('morse3');
+    const morseP4 = document.getElementById('morse4');
+    morseP1.innerHTML = "Loading.. please wait";
+    morseP2.innerHTML = "Loading.. please wait";
+    morseP3.innerHTML = "Loading.. please wait";
+    morseP4.innerHTML = "Loading.. please wait";
+    toMorse("Hello bob")
+        .then(morse => morseP1.innerHTML = morse.text + ", " + morse.code)
+        .catch(error => console.log(error))
+    toMorse("Hello bob")
+        .then(morse => morseP1.innerHTML = morse.text + ", " + morse.code)
+        .catch(error => console.log(error))
+</script>
 </html>
