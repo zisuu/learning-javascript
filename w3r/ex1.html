@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn js</title>
+</head>
+<body>
+<h2>learn js</h2>
+<p>none</p>
+<script>
+    const matches = (obj, source) =>
+        Object.keys(source).every(key => obj.hasOwnProperty(key) && obj[key] === source[key]);
+    console.log(matches({age: 25, hair: 'long', beard: true}, {hair: 'long', beard: true})); // true
+    console.log(matches({hair: 'long', beard: true}, {age: 25, hair: 'long', beard: true})); // false
+    console.log(matches({hair: 'long', beard: true}, {age: 26, hair: 'long', beard: true})); // false
+</script>
+</body>
+</html>
