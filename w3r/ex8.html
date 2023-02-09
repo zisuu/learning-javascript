@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset=utf-8 />
+    <title>Remove items from a dropdown list</title>
+</head><body><form>
+    <select id="colorSelect">
+        <option>Red</option>
+        <option>Green</option>
+        <option>White</option>
+        <option>Black</option>
+    </select>
+    <input type="button" value="Select and Remove">
+</form>
+</body>
+<script>
+    // Write a JavaScript program to remove items from a dropdown list.
+    const button = document.querySelector('input');
+    button.addEventListener('click', function () {
+        console.log(removeOption());
+    });
+
+    function removeOption() {
+        const colorSelect = document.getElementById("colorSelect");
+        colorSelect.options[colorSelect.selectedIndex].remove()
+    }
+</script>
+</html>

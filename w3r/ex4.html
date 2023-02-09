@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>learn js</title>
+    <meta charset=utf-8/>
 </head>
 <body>
-<h2>learn js</h2>
-<p className="test"></p>
-<p className="test"></p>
-<script>
-    document.getElementsByClassName("test")[0].innerHTML = "Hello";
-</script>
+<p><a href="https://www.w3resource.com/" hreflang="en-us" id="w3r" rel="nofollow" target="_self" type="text/html">w3resource</a>
+</p>
+<button>Click here to get attributes value</button>
 </body>
+<script>
+    // Here is a sample html file with a submit button. Write a JavaScript function to get the value of the
+    // href, hreflang, rel, target, and type attributes of the specified link.
+    const link = document.querySelector('a');
+    const buttonElement = document.querySelector('button');
+    buttonElement.addEventListener('click', function () {
+        console.log(link.href);
+        console.log(link.hreflang);
+        console.log(link.rel);
+        console.log(link.target);
+        console.log(link.type);
+    });
+
+</script>
 </html>

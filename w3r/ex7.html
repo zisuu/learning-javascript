@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8/>
+    <title>Change the content of a cell</title>
+    <style type="text/css">
+        body {
+            margin: 30px;
+        }
+    </style>
+</head>
+<body>
+<table border="1" id="myTable">
+</table>
+<form>
+    <input type="button" value="Create the table">
+</form>
+</body>
+<script>
+    // Write a JavaScript function that creates a table, accept row, column numbers from the user, and
+    // input row-column number as content (e.g. Row-0 Column-0) of a cell.
+    const button = document.querySelector('input');
+    button.addEventListener('click', function () {
+        createTable();
+    });
+
+    function createTable() {
+        rn = window.prompt("Input the number of Rows");
+        cn = window.prompt("Input the number of Columns");
+        const table = document.querySelector("table");
+        for (let i = 0; i < rn; i++) {
+            let newRow = table.insertRow(i)
+            for (let j = 0; j < cn; j++) {
+                newRow.insertCell(j).innerHTML = "Row-" + i + " Column-" + j
+            }
+        }
+    }
+</script>
+</html>
